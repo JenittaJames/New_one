@@ -1,0 +1,61 @@
+<!-- Background Floating Hearts Canvas -->
+<app-hearts-canvas />
+
+<!-- Top Music & Controls -->
+<app-audio-player />
+
+<!-- Passcode Lock Screen & Loader -->
+@if (!state.isUnlocked()) {
+  <app-lock-screen [unlockedInput]="state.isUnlocked()" />
+}
+
+<!-- Main Multi-Page Experience -->
+<main class="pages-container">
+  <!-- Page 1: Hero Welcome -->
+  <app-hero-page [active]="state.isUnlocked() && state.currentPage() === 1" />
+
+  <!-- Page 2: Birthday & Live Counter (July 27, 2023) -->
+  <app-counter-page [active]="state.isUnlocked() && state.currentPage() === 2" />
+
+  <!-- Page 3: 3D Envelope & Typewriter Love Letter -->
+  <app-letter-page [active]="state.isUnlocked() && state.currentPage() === 3" />
+
+  <!-- Page 4: Polaroid Memory Gallery (7 Categories) -->
+  <app-gallery-page [active]="state.isUnlocked() && state.currentPage() === 4" />
+
+  <!-- Page 5: Interactive Proposal & Dodging 'No' Button -->
+  <app-proposal-page [active]="state.isUnlocked() && state.currentPage() === 5" />
+
+  <!-- Page 6: Interactive Love Jigsaw Puzzle -->
+  <app-puzzle-page [active]="state.isUnlocked() && state.currentPage() === 6" />
+
+  <!-- Page 7: Romantic Memory Video -->
+  <app-video-page [active]="state.isUnlocked() && state.currentPage() === 7" />
+
+  <!-- Page 8: Secret Dream Story (Past, Present & Future) -->
+  <app-ai-video-page [active]="state.isUnlocked() && state.currentPage() === 8" />
+</main>
+
+<!-- Celebration Confetti Modal -->
+<app-celebration-modal [open]="state.isCelebrationOpen()" />
+
+<!-- Personalized Footer Watermark -->
+<div class="watermark">
+  Made with ❤️ by {{ state.config().senderName }} for {{ state.config().receiverName }}
+</div>
+
+<!-- System Shutdown HUD Animation -->
+@if (state.isShuttingDown()) {
+  <div class="system-shutdown-hud">
+    <div class="shutdown-spinner"></div>
+    <div class="shutdown-box">
+      <div class="shutdown-status-badge">⚡ CHACHAOS POWER MANAGEMENT</div>
+      <p class="shutdown-title">System Going to Sleep...</p>
+      <p class="shutdown-text">Encrypting memories • Saving session state • Goodnight, Chachaaa ❤️</p>
+    </div>
+  </div>
+}
+
+
+
+
